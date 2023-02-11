@@ -1,4 +1,5 @@
-﻿using Majorel.RestaurantsCollection.Application.Commands.CreateRestaurant;
+﻿using AutoMapper;
+using Majorel.RestaurantsCollection.Application.Commands.CreateRestaurant;
 using Majorel.RestaurantsCollection.Application.Commands.DeleteRestaurant;
 using Majorel.RestaurantsCollection.Application.Commands.UpdateRestaurantRating;
 using Majorel.RestaurantsCollection.Application.Dto;
@@ -19,12 +20,15 @@ namespace Majorel.RestaurantsCollection.API.Controllers;
 public class RestaurantController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public RestaurantController(IMediator mediator)
+    public RestaurantController(IMediator mediator, IMapper mapper)
     {
         ArgumentNullException.ThrowIfNull(mediator);
+        ArgumentNullException.ThrowIfNull(mapper);
 
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     /// <summary>
@@ -38,9 +42,10 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Create([FromBody]CreateRestaurantCommand restaurant)
+    public async Task<IActionResult> Create([FromBody]CreateRestaurantDto restaurant)
     {
-        var createdRestaurant = await _mediator.Send(restaurant, HttpContext.RequestAborted);
+        var command = _mapper.Map<CreateRestaurantCommand>(restaurant);
+        var createdRestaurant = await _mediator.Send(command, HttpContext.RequestAborted);
 
         return CreatedAtAction(nameof(GetById), new { id = createdRestaurant.Id }, createdRestaurant);
     }
@@ -132,14 +137,10 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> UpdateRating([FromRoute]int id, [FromBody]UpdateRestaurantRatingCommand restaurantRating)
+    public async Task<IActionResult> UpdateRating([FromRoute]int id, [FromBody]UpdateRestaurantRatingDto restaurantRating)
     {
-        if (id != restaurantRating.Id)
-        {
-            return BadRequest("Restaurant Id must be the same");
-        }
-
-        var restaurant = await _mediator.Send(restaurantRating, HttpContext.RequestAborted);
+        var command = _mapper.Map<UpdateRestaurantRatingCommand>(restaurantRating) with { Id = id };
+        var restaurant = await _mediator.Send(command, HttpContext.RequestAborted);
 
         return Ok(restaurant);
     }

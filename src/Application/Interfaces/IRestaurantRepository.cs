@@ -16,7 +16,7 @@ namespace Majorel.RestaurantsCollection.Application.Interfaces
         /// <param name="id">Restaurant ID</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Existing restaurant found</returns>
-        /// <exception cref="Exceptions.NotFoundException"></exception>
+        /// <exception cref="Domain.Exceptions.NotFoundException"></exception>
         public Task<Restaurant> GetByIdAsync(int id, CancellationToken cancellationToken);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Majorel.RestaurantsCollection.Application.Interfaces
         /// <param name="averageRating">Average rating of the restaurant</param>
         /// <param name="votes">Total reviews of the restaurant</param>
         /// <param name="cancellationToken"></param>
-        /// <exception cref="Exceptions.NotFoundException"></exception>
+        /// <exception cref="Domain.Exceptions.NotFoundException"></exception>
         public Task UpdateRatingAsync(int id, double averageRating, int votes, CancellationToken cancellationToken);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Majorel.RestaurantsCollection.Application.Interfaces
         /// </summary>
         /// <param name="id">Restaurant ID</param>
         /// <param name="cancellationToken"></param>
-        /// <exception cref="Exceptions.NotFoundException"></exception>
+        /// <exception cref="Domain.Exceptions.NotFoundException"></exception>
         public Task DeleteByIdAsync(int id, CancellationToken cancellationToken);
     }
 }

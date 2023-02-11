@@ -1,5 +1,34 @@
 # majorel-restaurants-collection
 
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreate --output-dir /src/Infrastructure/Persistence/Migrations --project src/Infrastructure/Majorel.RestaurantsCollection.Infrastructure.csproj
+
+
+### Install tooling
+
+Follow the [official EF Core documentation](https://docs.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools) to install the `dotnet ef` CLI tool.
+
+#### Create and update database
+
+To create or update the database manually from migrations, please use the following command:
+
+```cmd
+dotnet ef --project src/ConsoleApp/ConsoleApp.csproj database update
+```
+
+### Create a migration
+
+If you have changed the database schema and need to create a migration, please use the following command:
+
+```cmd
+dotnet ef migrations add MigrationName --project src/ConsoleApp/ConsoleApp.csproj --output-dir Postgres/Migrations
+```
+
+You can read more about migrations in the [official EF Core documentation](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli).
+
+
+
+
 TODO
 Automapper
 Get rid of in memory DB
