@@ -18,14 +18,14 @@ internal class RestaurantRepository : IRestaurantRepository
 
     public async Task<IReadOnlyCollection<Restaurant>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var restaurants = await _dbContext.Restaurants.ToListAsync(cancellationToken);
+        var restaurants = await _dbContext.Restaurants.AsNoTracking().ToListAsync(cancellationToken);
 
         return restaurants;
     }
 
     public async Task<IReadOnlyCollection<Restaurant>> GetAllSortedByRatingAsync(CancellationToken cancellationToken)
     {
-        var restaurants = await _dbContext.Restaurants.OrderBy(r => r.AverageRating).ToListAsync(cancellationToken);
+        var restaurants = await _dbContext.Restaurants.OrderBy(r => r.AverageRating).AsNoTracking().ToListAsync(cancellationToken);
 
         return restaurants;
     }

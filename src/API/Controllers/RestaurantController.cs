@@ -1,4 +1,5 @@
 ﻿using Majorel.RestaurantsCollection.Application.Commands.CreateRestaurant;
+using Majorel.RestaurantsCollection.Application.Commands.DeleteRestaurant;
 using Majorel.RestaurantsCollection.Application.Commands.UpdateRestaurantRating;
 using Majorel.RestaurantsCollection.Application.Dto;
 using Majorel.RestaurantsCollection.Application.Queries.GetAllRestaurants;
@@ -86,9 +87,10 @@ public class RestaurantController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
@@ -97,20 +99,32 @@ public class RestaurantController : ControllerBase
         return Ok(restaurant);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateRatingAsync([FromRoute]int id, [FromBody]UpdateRestaurantRatingCommand restaurantRating)
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateRating([FromRoute]int id, [FromBody]UpdateRestaurantRatingCommand restaurantRating)
     {
         if (id != restaurantRating.Id)
         {
             return BadRequest("Restaurant Id must be the same");
         }
 
-        return Ok();
+        var restaurant = await _mediator.Send(restaurantRating, HttpContext.RequestAborted);
+
+        return Ok(restaurant);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute]int id)
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Delete([FromRoute]int id)
     {
-        return NoContent();
+        await _mediator.Send(new DeleteRestaurantCommand(id), HttpContext.RequestAborted);
+
+        return Ok();
     }
 }
