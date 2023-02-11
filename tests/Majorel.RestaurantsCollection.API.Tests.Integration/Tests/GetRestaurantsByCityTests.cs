@@ -4,17 +4,18 @@ using System.Net;
 namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
 {
     [Collection(nameof(RestaurantWebApplicationFactory<Program>))]
-    public class GetAllRestaurantsTests : BaseTest
+    public class GetRestaurantsByCityTests : BaseTest
     {
-        public GetAllRestaurantsTests() : base() { }
+        public GetRestaurantsByCityTests() : base() { }
 
         [Fact]
-        public async Task GetAllRestaurants_ReturnsAllRestaurantsOrderedById()
+        public async Task GetRestaurantsByCity_ReturnsAllRestaurantsInSpecifiedCity()
         {
             // Arrange
-            var requestUri = new Uri($"restaurant", UriKind.Relative);
+            const string city = "Minsk";
+            var requestUri = new Uri($"restaurant/query?city={city}", UriKind.Relative);
 
-            var expectedResponse = (await File.ReadAllTextAsync("Data/get-all-restaurants-response.json")).Minify();
+            var expectedResponse = (await File.ReadAllTextAsync("Data/get-restaurants-by-city-response.json")).Minify();
 
             // Act
             var httpResponse = await Client.GetAsync(requestUri);

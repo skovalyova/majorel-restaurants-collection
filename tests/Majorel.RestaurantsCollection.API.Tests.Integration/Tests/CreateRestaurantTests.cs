@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Majorel.RestaurantsCollection.API.Tests.Integration.Extensions;
+﻿using Majorel.RestaurantsCollection.API.Tests.Integration.Extensions;
 using System.Net;
 using System.Text;
 
@@ -11,7 +10,7 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
         public CreateRestaurantTests() : base() { }
 
         [Fact]
-        public async Task CreateRestaurant_ShouldReturnNewlyCreatedRestaurant_WhenValidRequest()
+        public async Task CreateRestaurant_ReturnsNewlyCreatedRestaurant()
         {
             // Arrange
             var requestUri = new Uri($"restaurant", UriKind.Relative);

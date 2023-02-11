@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Majorel.RestaurantsCollection.API.Tests.Integration.Extensions;
+﻿using Majorel.RestaurantsCollection.API.Tests.Integration.Extensions;
 using System.Net;
 
 namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
@@ -10,7 +9,7 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
         public GetRestaurantByIdTests() : base() { }
 
         [Fact]
-        public async Task GetRestaurantById_ShouldReturnRestaurant_WhenItExists()
+        public async Task GetRestaurantById_ReturnsRestaurant_WhenExistingId()
         {
             // Arrange
             const int id = 1;
@@ -26,6 +25,20 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
 
             var content = await httpResponse.Content.ReadAsStringAsync();
             content.Should().BeEquivalentTo(expectedResponse);
+        }
+
+        [Fact]
+        public async Task GetRestaurantById_ReturnsNotFound_WhenNonExistingId()
+        {
+            // Arrange
+            const int nonExistingId = 10000;
+            var requestUri = new Uri($"restaurant/{nonExistingId}", UriKind.Relative);
+
+            // Act
+            var httpResponse = await Client.GetAsync(requestUri);
+
+            // Assert
+            httpResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
     }
 }

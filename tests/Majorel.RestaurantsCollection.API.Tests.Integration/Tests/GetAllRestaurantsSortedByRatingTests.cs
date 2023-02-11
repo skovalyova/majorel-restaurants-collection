@@ -4,17 +4,17 @@ using System.Net;
 namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
 {
     [Collection(nameof(RestaurantWebApplicationFactory<Program>))]
-    public class GetAllRestaurantsTests : BaseTest
+    public class GetAllRestaurantsSortedByRatingTests : BaseTest
     {
-        public GetAllRestaurantsTests() : base() { }
+        public GetAllRestaurantsSortedByRatingTests() : base() { }
 
         [Fact]
-        public async Task GetAllRestaurants_ReturnsAllRestaurantsOrderedById()
+        public async Task GetAllSortedRestaurants_ReturnsAllRestaurantsSortedByAverageRating()
         {
             // Arrange
-            var requestUri = new Uri($"restaurant", UriKind.Relative);
+            var requestUri = new Uri($"restaurant/sort", UriKind.Relative);
 
-            var expectedResponse = (await File.ReadAllTextAsync("Data/get-all-restaurants-response.json")).Minify();
+            var expectedResponse = (await File.ReadAllTextAsync("Data/get-all-restaurants-sorted-by-rating-response.json")).Minify();
 
             // Act
             var httpResponse = await Client.GetAsync(requestUri);

@@ -10,7 +10,6 @@ namespace Majorel.RestaurantsCollection.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("RestaurantsCollection"));
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:RestaurantsDatabase"));
 

@@ -1,0 +1,26 @@
+﻿[
+  {
+    "id": 3,
+    "city": "Minsk",
+    "name": "JustEat",
+    "estimatedCost": 8,
+    "averageRating": "3.73",
+    "votes": 94671
+  },
+  {
+    "id": 2,
+    "city": "Grodno",
+    "name": "Burgerking",
+    "estimatedCost": 15,
+    "averageRating": "4",
+    "votes": 1985
+  },
+  {
+    "id": 1,
+    "city": "Polotsk",
+    "name": "Kinza",
+    "estimatedCost": 25,
+    "averageRating": "4.2",
+    "votes": 27
+  }
+]
