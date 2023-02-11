@@ -3,20 +3,28 @@ using Majorel.RestaurantsCollection.API.Middlewares;
 using Majorel.RestaurantsCollection.Application;
 using Majorel.RestaurantsCollection.Infrastructure;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace Majorel.RestaurantsCollection.API;
 
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices();
-builder.Services.AddApiServices();
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+        builder.Services.AddApplicationServices();
+        builder.Services.AddInfrastructureServices();
+        builder.Services.AddApiServices();
 
-app.MapControllers();
-app.UseSwagger();
-app.UseSwaggerUI();
+        var app = builder.Build();
 
-app.UseHttpsRedirection();
+        app.MapControllers();
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+        app.UseHttpsRedirection();
 
-app.Run();
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+        app.Run();
+    }
+}

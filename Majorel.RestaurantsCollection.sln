@@ -5,16 +5,22 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majorel.RestaurantsCollection.API", "src\API\Majorel.RestaurantsCollection.API.csproj", "{1B2AE647-4939-44E2-84B0-FB8BA33CF5D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majorel.RestaurantsCollection.Infrastructure", "src\Infrastructure\Majorel.RestaurantsCollection.Infrastructure.csproj", "{4FECECAA-F49E-4B66-A30C-4D9BBB65E123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majorel.RestaurantsCollection.Infrastructure", "src\Infrastructure\Majorel.RestaurantsCollection.Infrastructure.csproj", "{4FECECAA-F49E-4B66-A30C-4D9BBB65E123}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majorel.RestaurantsCollection.Domain", "src\Domain\Majorel.RestaurantsCollection.Domain.csproj", "{6841A7D8-1E9E-4D33-984D-5417627139C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majorel.RestaurantsCollection.Domain", "src\Domain\Majorel.RestaurantsCollection.Domain.csproj", "{6841A7D8-1E9E-4D33-984D-5417627139C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majorel.RestaurantsCollection.Application", "src\Application\Majorel.RestaurantsCollection.Application.csproj", "{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majorel.RestaurantsCollection.Application", "src\Application\Majorel.RestaurantsCollection.Application.csproj", "{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{137F0BB3-1A33-4B17-9DA9-46592E1FD9D6}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{461B4E44-C2E3-4F71-A9E4-B4A57C763AE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BF6F310B-2BB2-46AD-824B-B893E73A70F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majorel.RestaurantsCollection.API.Tests.Integration", "tests\Majorel.RestaurantsCollection.API.Tests.Integration\Majorel.RestaurantsCollection.API.Tests.Integration.csproj", "{715CD04E-31AD-4271-A1EE-93D3381004BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +44,20 @@ Global
 		{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715CD04E-31AD-4271-A1EE-93D3381004BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715CD04E-31AD-4271-A1EE-93D3381004BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715CD04E-31AD-4271-A1EE-93D3381004BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715CD04E-31AD-4271-A1EE-93D3381004BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B2AE647-4939-44E2-84B0-FB8BA33CF5D4} = {461B4E44-C2E3-4F71-A9E4-B4A57C763AE3}
+		{4FECECAA-F49E-4B66-A30C-4D9BBB65E123} = {461B4E44-C2E3-4F71-A9E4-B4A57C763AE3}
+		{6841A7D8-1E9E-4D33-984D-5417627139C9} = {461B4E44-C2E3-4F71-A9E4-B4A57C763AE3}
+		{D4B9F4EE-9FB3-41B7-B36A-E05A5CC5C8CA} = {461B4E44-C2E3-4F71-A9E4-B4A57C763AE3}
+		{715CD04E-31AD-4271-A1EE-93D3381004BF} = {BF6F310B-2BB2-46AD-824B-B893E73A70F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C038458C-1917-4DA2-85E1-1503BA7AB676}
