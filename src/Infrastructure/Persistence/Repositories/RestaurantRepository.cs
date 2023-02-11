@@ -32,7 +32,7 @@ internal class RestaurantRepository : IRestaurantRepository
 
     public async Task<IReadOnlyCollection<Restaurant>> GetByCityAsync(string city, CancellationToken cancellationToken)
     {
-        var restaurants = await _dbContext.Restaurants.Where(r => r.City == city).ToListAsync(cancellationToken);
+        var restaurants = await _dbContext.Restaurants.Where(r => r.City == city).AsNoTracking().ToListAsync(cancellationToken);
 
         return restaurants;
     }
@@ -76,9 +76,10 @@ internal class RestaurantRepository : IRestaurantRepository
     {
         var restaurant = await GetByIdAsync(id, cancellationToken);
 
-        var updated = restaurant with { AverageRating = averageRating, Votes = votes };
+        restaurant.AverageRating = averageRating;
+        restaurant.Votes = votes;
 
-        _dbContext.Restaurants.Update(updated);
+        _dbContext.Restaurants.Update(restaurant);
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Majorel.RestaurantsCollection.Application.Commands.UpdateRestaurantRating;
 
-public record UpdateRestaurantRatingCommand(int Id, string AverageRating, int Votes) : IRequest<RestaurantDto>;
+public record UpdateRestaurantRatingCommand(int Id, double AverageRating, int Votes) : IRequest<RestaurantDto>;

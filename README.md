@@ -3,6 +3,9 @@
 dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate --output-dir /src/Infrastructure/Persistence/Migrations --project src/Infrastructure/Majorel.RestaurantsCollection.Infrastructure.csproj
 
+Set infra as default project in package manager console
+Add-Migration AddRestaurantEntity -OutputDir Persistence/Migrations
+Update-Database
 
 ### Install tooling
 
@@ -28,7 +31,7 @@ You can read more about migrations in the [official EF Core documentation](https
 
 
 
-
+SECRETS
 TODO
 Automapper
 Get rid of in memory DB

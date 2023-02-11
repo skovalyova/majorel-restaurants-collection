@@ -42,7 +42,7 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Create([FromBody]CreateRestaurantDto restaurant)
+    public async Task<IActionResult> Create([FromBody] CreateRestaurantDto restaurant)
     {
         var command = _mapper.Map<CreateRestaurantCommand>(restaurant);
         var createdRestaurant = await _mediator.Send(command, HttpContext.RequestAborted);
@@ -97,7 +97,7 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyCollection<RestaurantDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByCity([FromQuery]string city)
+    public async Task<IActionResult> GetByCity([FromQuery] string city)
     {
         var restaurants = await _mediator.Send(new GetRestaurantsByCityQuery(city), HttpContext.RequestAborted);
 
@@ -137,7 +137,7 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> UpdateRating([FromRoute]int id, [FromBody]UpdateRestaurantRatingDto restaurantRating)
+    public async Task<IActionResult> UpdateRating([FromRoute] int id, [FromBody] UpdateRestaurantRatingDto restaurantRating)
     {
         var command = _mapper.Map<UpdateRestaurantRatingCommand>(restaurantRating) with { Id = id };
         var restaurant = await _mediator.Send(command, HttpContext.RequestAborted);
@@ -157,7 +157,7 @@ public class RestaurantController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Delete([FromRoute]int id)
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await _mediator.Send(new DeleteRestaurantCommand(id), HttpContext.RequestAborted);
 

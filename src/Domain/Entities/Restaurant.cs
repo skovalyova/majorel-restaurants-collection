@@ -1,4 +1,17 @@
 ﻿namespace Majorel.RestaurantsCollection.Domain.Entities
 {
-    public record Restaurant(int Id, string City, string Name, int EstimatedCost, double AverageRating, int Votes);
+    public class Restaurant
+    {
+        public int Id { get; set; }
+
+        public string City { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public int EstimatedCost { get; set; }
+
+        public double AverageRating { get; set; }
+
+        public int Votes { get; set; }
+    }
 }
