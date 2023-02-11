@@ -1,4 +1,3 @@
-using Majorel.RestaurantsCollection.API;
 using Majorel.RestaurantsCollection.API.Middlewares;
 using Majorel.RestaurantsCollection.Application;
 using Majorel.RestaurantsCollection.Infrastructure;

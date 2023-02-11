@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Majorel.RestaurantsCollection.API.Tests.Integration
 {
-    public class RestaurantWebApplicationFactory : WebApplicationFactory<API.Program>
+    public class RestaurantWebApplicationFactory<T> : WebApplicationFactory<Program>
     {
         public RestaurantWebApplicationFactory()
         {
@@ -25,7 +25,15 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration
                     services.Remove(dbContextDescriptor);
                 }
 
-                services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("InMemoryRestaurantsCollection"));
+                var serviceProvider = services
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
+
+                services.AddDbContext<ApplicationDbContext>(options =>
+                {
+                    options.UseInMemoryDatabase($"RestaurantsCollectionDb");
+                    options.UseInternalServiceProvider(serviceProvider);
+                });
             });
 
             builder.UseEnvironment("Development");

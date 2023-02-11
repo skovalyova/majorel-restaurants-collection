@@ -3,18 +3,12 @@ using Majorel.RestaurantsCollection.API.Tests.Integration.Extensions;
 using System.Net;
 using System.Text;
 
-namespace Majorel.RestaurantsCollection.API.Tests.Integration
+namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
 {
-    public sealed class CreateRestaurantTests : IClassFixture<RestaurantWebApplicationFactory>, IDisposable
+    [Collection(nameof(RestaurantWebApplicationFactory<Program>))]
+    public class CreateRestaurantTests : BaseTest
     {
-        private readonly HttpClient _client;
-        private readonly RestaurantWebApplicationFactory _factory;
-
-        public CreateRestaurantTests(RestaurantWebApplicationFactory factory)
-        {
-            _client = factory.CreateClient();
-            _factory = factory;
-        }
+        public CreateRestaurantTests() : base() { }
 
         [Fact]
         public async Task CreateRestaurant_ShouldReturnNewlyCreatedRestaurant_WhenValidRequest()
@@ -28,7 +22,7 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration
             var expectedResponse = (await File.ReadAllTextAsync("Data/create-restaurant-response.json")).Minify();
 
             // Act
-            var httpResponse = await _client.PostAsync(requestUri, requestBody);
+            var httpResponse = await Client.PostAsync(requestUri, requestBody);
 
             // Assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -36,13 +30,6 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration
 
             var content = await httpResponse.Content.ReadAsStringAsync();
             content.Should().BeEquivalentTo(expectedResponse);
-        }
-
-        public void Dispose()
-        {
-            _client.Dispose();
-
-            GC.SuppressFinalize(this);
         }
     }
 }

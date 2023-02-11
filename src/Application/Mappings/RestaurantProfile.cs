@@ -12,6 +12,7 @@ namespace Majorel.RestaurantsCollection.Application.Mappings
         public RestaurantProfile()
         {
             CreateMap<Restaurant, RestaurantDto>()
+                .ForCtorParam(nameof(RestaurantDto.AverageRating), m => m.MapFrom(s => s.AverageRating.ToString(CultureInfo.InvariantCulture)))
                 .ReverseMap();
 
             CreateMap<CreateRestaurantDto, CreateRestaurantCommand>()
