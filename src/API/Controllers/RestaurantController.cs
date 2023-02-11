@@ -30,9 +30,9 @@ public class RestaurantController : ControllerBase
     /// <summary>
     /// Creates a restaurant.
     /// </summary>
-    /// <param name="restaurant"></param>
     /// <returns>A newly created restaurant</returns>
-    /// <response code="200">Request validation has failed</response>
+    /// <response code="201">Success</response>
+    /// <response code="400">Request validation has failed</response>
     /// <response code="500">Internal server error</response>
     [HttpPost]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status201Created)]
@@ -46,9 +46,12 @@ public class RestaurantController : ControllerBase
     }
 
     /// <summary>
-    /// Gets a collection of restaurants.
+    /// Gets a collection of all restaurants.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>All restaurants ordered by ID</returns>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="500">Internal server error</response>
     [HttpGet]
     [ProducesResponseType(typeof(IReadOnlyCollection<RestaurantDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -60,6 +63,13 @@ public class RestaurantController : ControllerBase
         return Ok(restaurants);
     }
 
+    /// <summary>
+    /// Gets a collection of all restaurants sorted by average rating.
+    /// </summary>
+    /// <returns>All restaurants ordered by average rating</returns>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="500">Internal server error</response>
     [HttpGet("sort")]
     [ProducesResponseType(typeof(IReadOnlyCollection<RestaurantDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -71,6 +81,13 @@ public class RestaurantController : ControllerBase
         return Ok(restaurants);
     }
 
+    /// <summary>
+    /// Gets a collection of restaurants in a particular city.
+    /// </summary>
+    /// <returns>All restaurants in a particular city</returns>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="500">Internal server error</response>
     [HttpGet("query")]
     [ProducesResponseType(typeof(IReadOnlyCollection<RestaurantDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -83,10 +100,13 @@ public class RestaurantController : ControllerBase
     }
 
     /// <summary>
-    /// Gets a specific restaurant by its ID.
+    /// Gets a specific restaurant.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
+    /// <returns>A restaurant</returns>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="404">Resource is not found</response>
+    /// <response code="500">Internal server error</response>
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -99,6 +119,14 @@ public class RestaurantController : ControllerBase
         return Ok(restaurant);
     }
 
+    /// <summary>
+    /// Updates average rating and votes for a specific restaurant.
+    /// </summary>
+    /// <returns>An updated restaurant</returns>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="404">Resource is not found</response>
+    /// <response code="500">Internal server error</response>
     [HttpPut("{id:int}")]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
@@ -116,6 +144,13 @@ public class RestaurantController : ControllerBase
         return Ok(restaurant);
     }
 
+    /// <summary>
+    /// Deletes a specific restaurant.
+    /// </summary>
+    /// <response code="200">Success</response>
+    /// <response code="400">Request validation has failed</response>
+    /// <response code="404">Resource is not found</response>
+    /// <response code="500">Internal server error</response>
     [HttpDelete("{id:int}")]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
