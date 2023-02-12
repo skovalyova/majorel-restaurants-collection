@@ -132,7 +132,7 @@ public class RestaurantController : ControllerBase
     /// <response code="400">Request validation has failed</response>
     /// <response code="404">Resource is not found</response>
     /// <response code="500">Internal server error</response>
-    [HttpPut("{id:int}")]
+    [HttpPatch("{id:int}")]
     [ProducesResponseType(typeof(RestaurantDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]

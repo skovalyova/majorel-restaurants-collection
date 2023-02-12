@@ -20,14 +20,6 @@ namespace Majorel.RestaurantsCollection.Application.Interfaces
         public Task<Restaurant> GetByIdAsync(int id, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Find a restaurant by ID.
-        /// </summary>
-        /// <param name="id">Restaurant ID</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>Existing restaurant found, or null</returns>
-        public Task<Restaurant?> GetByIdOrDefaultAsync(int id, CancellationToken cancellationToken);
-
-        /// <summary>
         /// Create a new restaurant.
         /// </summary>
         /// <param name="restaurant">Details of the restaurant</param>

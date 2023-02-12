@@ -5,12 +5,12 @@ using System.Text;
 namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
 {
     [Collection(nameof(RestaurantWebApplicationFactory<Program>))]
-    public class UpdateRestaurantTests : BaseTest
+    public class UpdateRestaurantRatingTests : BaseTest
     {
-        public UpdateRestaurantTests() : base() { }
+        public UpdateRestaurantRatingTests() : base() { }
 
         [Fact]
-        public async Task UpdateRestaurant_ReturnsUpdatedRestaurant()
+        public async Task UpdateRestaurantRating_ReturnsUpdatedRestaurant()
         {
             // Arrange
             const int id = 2;
@@ -22,7 +22,7 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration.Tests
             var expectedResponse = (await File.ReadAllTextAsync("Data/update-restaurant-response.json")).Minify();
 
             // Act
-            var httpResponse = await Client.PutAsync(requestUri, requestBody);
+            var httpResponse = await Client.PatchAsync(requestUri, requestBody);
 
             // Assert
             httpResponse.StatusCode.Should().Be(HttpStatusCode.OK);

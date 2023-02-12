@@ -1,0 +1,28 @@
+version: '3'
+services:
+  restaurants-collection-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings:RestaurantsDatabase=Server=mssql;Initial Catalog=RestaurantDb;Persist Security Info=True;User ID=sa;Password=${MSSQL_SA_PASSWORD};Connect Timeout=30;Encrypt=False
+    env_file:
+      - .env
+    build:
+      context: .
+    container_name: restaurants-collection-api
+    ports:
+      - 5000:80
+    depends_on:
+      - mssql
+
+  mssql:
+    image: 'mcr.microsoft.com/mssql/server:2022-latest'
+    user: root
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+    env_file:
+      - .env
+    # volumes:
+    #   - './drive:/var/opt/mssql/data'

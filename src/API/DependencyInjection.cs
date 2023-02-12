@@ -9,7 +9,7 @@ namespace Majorel.RestaurantsCollection.API
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
-            services.AddControllers();//.AddFluentValidation();
+            services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
             {

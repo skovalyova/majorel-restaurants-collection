@@ -25,14 +25,14 @@ internal class RestaurantRepository : IRestaurantRepository
 
     public async Task<IReadOnlyCollection<Restaurant>> GetAllSortedByRatingAsync(CancellationToken cancellationToken)
     {
-        var restaurants = await _dbContext.Restaurants.OrderBy(r => r.AverageRating).AsNoTracking().ToListAsync(cancellationToken);
+        var restaurants = await _dbContext.Restaurants.AsNoTracking().OrderBy(r => r.AverageRating).ToListAsync(cancellationToken);
 
         return restaurants;
     }
 
     public async Task<IReadOnlyCollection<Restaurant>> GetByCityAsync(string city, CancellationToken cancellationToken)
     {
-        var restaurants = await _dbContext.Restaurants.Where(r => r.City == city).AsNoTracking().ToListAsync(cancellationToken);
+        var restaurants = await _dbContext.Restaurants.AsNoTracking().Where(r => r.City == city).ToListAsync(cancellationToken);
 
         return restaurants;
     }
@@ -49,13 +49,6 @@ internal class RestaurantRepository : IRestaurantRepository
         return restaurant;
     }
 
-    public async Task<Restaurant?> GetByIdOrDefaultAsync(int id, CancellationToken cancellationToken)
-    {
-        var restaurant = await _dbContext.Restaurants.FindAsync(id, cancellationToken);
-
-        return restaurant;
-    }
-
     public async Task<int> CreateAsync(Restaurant restaurant, CancellationToken cancellationToken)
     {
         await _dbContext.Restaurants.AddAsync(restaurant, cancellationToken);
@@ -66,8 +59,14 @@ internal class RestaurantRepository : IRestaurantRepository
 
     public async Task DeleteByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var restaurant = await GetByIdAsync(id, cancellationToken);
+        var exists = _dbContext.Restaurants.Any(r => r.Id == id);
 
+        if (!exists)
+        {
+            throw new NotFoundException(nameof(Restaurant), id.ToString());
+        }
+
+        var restaurant = new Restaurant { Id = id };
         _dbContext.Restaurants.Remove(restaurant);
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
