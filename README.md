@@ -49,14 +49,16 @@ You may follow any of two options below in order to start the application.
 
 - Open the command line and `cd` into the root repository catalog.
 - Create an empty text file with the name `.env`.
-- Paste the following `key=value` configuration settings to the `.env` file as shown below, feel free to change the value:
-    - `MSSQL_SA_PASSWORD=S0meStr0ngP@$$w0rd`
-    - Please note the password must be at least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+- Paste the following `key=value` configuration settings to the `.env` file as shown below, feel free to change the password value:
+  - `MSSQL_SA_PASSWORD=S0meStr0ngP@$$w0rd`
+  - Please note the password must be at least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.
 - Run `docker compose -p restaurants-collection-dev -f "docker-compose.dev.yml" up -d` command to spin up SQL database and API.
 - Database is created automatically during the application startup.
 - Navigate to the [http://localhost:5000/swagger](http://localhost:5000/swagger) to start exploring the API.
 
 ## Maintenance
+
+Set of operations useful during the development.
 
 ### Install DB management tooling
 
