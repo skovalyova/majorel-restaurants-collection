@@ -6,29 +6,26 @@ A company is launching a new service that provides details of restaurants sprea
 
 ## Implementation notes
 
-Stack:
+### Stack
 
 - .NET 7
 - Entity Framework
 - MS SQL
-- Mediatr
-- Automapper
+- Mediatr, Automapper, FluentValidation
 - XUnit, FluentAssertions
 
-Changes in contracts:
+### Changes in contracts
 
 - The `Update rating` endpoint was implemented using PATCH instead of PUT to highlight that the resource is updated partially.
 - The `Get by ID` endpoint was implemented as `restaurant/{id}` rather than `restaurant/query?id={id}` to separate it from filtering endpoints and to better follow REST principles.
 
-TODO:
+### Out of scope
 
-- Remove commented code, cleanup of usings
-- Describe changes in contracts
-- Add validation to all endpoints (FluentValidation) - if time allows
-- Test error handling middleware
-- Configure and describe docker and docker compose
-- Meaningful swagger samples
-- Check the solution has no warnings
+Things that must be implemented in a real application but skipped due to lack of time:
+
+- Unit tests
+- More scenarios covered in integration tests
+- Editorconfig with code style conventions
 
 ## Tests
 
@@ -43,7 +40,8 @@ You may follow any of two options below in order to start the application.
 
 - Make sure you have the SQL database instance up and running.
 - Use `appsettings.Development.json` or secret manager in order to set `ConnectionStrings->RestaurantsDatabase` connection string.
-- Run the application in Visual Studio.
+- Make sure the `Majorel.RestaurantsApp.API` is selected as a startup project.
+- Run the application in Visual Studio using either `https` or `http` profile.
 - Database is created automatically during the application startup.
 - Navigate to the [https://localhost:7015/swagger](https://localhost:7015/swagger) to start exploring the API.
 

@@ -1,4 +1,5 @@
-﻿using Majorel.RestaurantsCollection.API.Helpers;
+﻿using FluentValidation;
+using Majorel.RestaurantsCollection.API.Helpers;
 using Majorel.RestaurantsCollection.Domain.Exceptions;
 using System.Text.Json;
 
@@ -21,6 +22,10 @@ namespace Majorel.RestaurantsCollection.API.Middlewares
             try
             {
                 await _next(context);
+            }
+            catch (ValidationException exception)
+            {
+                await HandleExceptionAsync(context, exception, StatusCodes.Status400BadRequest);
             }
             catch (NotFoundException exception)
             {
