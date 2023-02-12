@@ -26,6 +26,10 @@ namespace Majorel.RestaurantsCollection.API.Middlewares
             {
                 await HandleExceptionAsync(context, exception, StatusCodes.Status404NotFound);
             }
+            catch (Exception exception)
+            {
+                await HandleExceptionAsync(context, exception, StatusCodes.Status500InternalServerError);
+            }
         }
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception, int statusCode)

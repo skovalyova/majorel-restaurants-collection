@@ -90,6 +90,7 @@ public class RestaurantController : ControllerBase
     /// Gets a collection of restaurants in a particular city.
     /// </summary>
     /// <returns>All restaurants in a particular city</returns>
+    /// <param name="city" example="Miamy"></param>
     /// <response code="200">Success</response>
     /// <response code="400">Request validation has failed</response>
     /// <response code="500">Internal server error</response>
@@ -108,6 +109,7 @@ public class RestaurantController : ControllerBase
     /// Gets a specific restaurant.
     /// </summary>
     /// <returns>A restaurant</returns>
+    /// <param name="id" example="1"></param>
     /// <response code="200">Success</response>
     /// <response code="400">Request validation has failed</response>
     /// <response code="404">Resource is not found</response>
@@ -128,6 +130,8 @@ public class RestaurantController : ControllerBase
     /// Updates average rating and votes for a specific restaurant.
     /// </summary>
     /// <returns>An updated restaurant</returns>
+    /// <param name="id" example="1"></param>
+    /// <param name="restaurantRating">Updated rating details</param>
     /// <response code="200">Success</response>
     /// <response code="400">Request validation has failed</response>
     /// <response code="404">Resource is not found</response>
@@ -148,6 +152,7 @@ public class RestaurantController : ControllerBase
     /// <summary>
     /// Deletes a specific restaurant.
     /// </summary>
+    /// <param name="id" example="1"></param>
     /// <response code="200">Success</response>
     /// <response code="400">Request validation has failed</response>
     /// <response code="404">Resource is not found</response>
