@@ -29,9 +29,11 @@ public class Program
         {
             var logger = app.Services.GetRequiredService<ILogger<Program>>();
             logger.LogInformation("Starting automated database migration.");
+
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             dbContext.Database.EnsureCreated();
+
             logger.LogInformation("Database is successfully created.");
         }
 

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Text;
 
 namespace Majorel.RestaurantsCollection.API.Helpers
 {
@@ -12,7 +10,7 @@ namespace Majorel.RestaurantsCollection.API.Helpers
 
         public static ProblemDetails GetProblemDetails(int statusCode, string message)
         {
-            var (Type, Title) = statusCode switch
+            var (type, title) = statusCode switch
             {
                 StatusCodes.Status400BadRequest => (Type: ValidationErrorType, Title: "Request is malformed."),
 
@@ -23,29 +21,13 @@ namespace Majorel.RestaurantsCollection.API.Helpers
 
             var result = new ProblemDetails()
             {
-                Type = Type,
+                Type = type,
                 Status = statusCode,
-                Title = Title,
+                Title = title,
                 Detail = message
             };
 
             return result;
-        }
-
-        public static string GetErrorMessageFromModelState(ModelStateDictionary modelState)
-        {
-            var errorMessage = new StringBuilder();
-
-            foreach (var keyModelStatePair in modelState)
-            {
-                var key = string.IsNullOrEmpty(keyModelStatePair.Key) ? "form" : keyModelStatePair.Key;
-
-                keyModelStatePair.Value.Errors
-                    .ToList()
-                    .ForEach(error => errorMessage.AppendLine($"{key} : {error.ErrorMessage}"));
-            }
-
-            return errorMessage.ToString();
         }
     }
 }

@@ -43,9 +43,11 @@ You may follow any of two options below in order to start the application.
 - Make sure the `Majorel.RestaurantsApp.API` is selected as a startup project.
 - Run the application in Visual Studio using either `https` or `http` profile.
 - Database is created automatically during the application startup.
-- Navigate to the [https://localhost:7015/swagger](https://localhost:7015/swagger) to start exploring the API.
+- Navigate to the [https://localhost:7015/swagger](https://localhost:7015/swagger) or [http://localhost:5090/swagger/index.html](http://localhost:5090/swagger/index.html) to start exploring the API.
 
 ### Option 2 - Docker
+
+> Please note that MS SQL on Docker suffers from known issue **on Mac** and may not work properly.
 
 - Open the command line and `cd` into the root repository catalog.
 - Create an empty text file with the name `.env`.

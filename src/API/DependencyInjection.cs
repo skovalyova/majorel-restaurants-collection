@@ -1,7 +1,4 @@
-﻿using Majorel.RestaurantsCollection.API.Controllers;
-using Majorel.RestaurantsCollection.Application.Dto;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+﻿using Microsoft.OpenApi.Models;
 
 namespace Majorel.RestaurantsCollection.API
 {
@@ -17,12 +14,6 @@ namespace Majorel.RestaurantsCollection.API
                 {
                     Title = "Restaurants Collection API"
                 });
-
-                var assemblies = new List<Assembly>
-                {
-                    Assembly.GetAssembly(typeof(RestaurantController))!,
-                    Assembly.GetAssembly(typeof(RestaurantDto))!
-                };
 
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
                 xmlFiles.ForEach(xmlFile => options.IncludeXmlComments(xmlFile));

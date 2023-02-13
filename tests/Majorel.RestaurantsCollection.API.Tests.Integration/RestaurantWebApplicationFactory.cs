@@ -22,6 +22,7 @@ namespace Majorel.RestaurantsCollection.API.Tests.Integration
 
                 if (dbContextDescriptor is not null)
                 {
+                    // Get rid of the connection to the real database which is configured in Program.cs
                     services.Remove(dbContextDescriptor);
                 }
 
